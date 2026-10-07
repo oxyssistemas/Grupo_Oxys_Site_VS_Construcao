@@ -6,8 +6,8 @@ export const ServicesTechSection: React.FC = () => {
   return (
     <section id="servicos" className="relative py-12 sm:py-16 bg-[#02050e] overflow-hidden scroll-mt-20">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[350px] bg-blue-600/10 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[300px] bg-sky-500/8 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[350px] bg-radial from-blue-600/10 to-transparent to-65% rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[300px] bg-radial from-sky-500/8 to-transparent to-65% rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -20,8 +20,8 @@ export const ServicesTechSection: React.FC = () => {
           ========================================================================
         */}
         <motion.div
-          initial={{ opacity: 0, y: 32, filter: 'blur(8px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15, margin: '-50px 0px' }}
           transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="relative rounded-[28px] bg-gradient-to-b from-[#060d1e] via-[#040816] to-[#030612] border border-[#14223b] shadow-[0_20px_50px_rgba(0,0,0,0.85)] p-6 sm:p-8 lg:p-8 xl:p-10 overflow-hidden"

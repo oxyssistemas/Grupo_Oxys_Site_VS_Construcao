@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import portalImage from '../assets/images/portal_exact_match_1787809375383.jpg';
+import portalImage from '../assets/images/portal_process.webp';
 
 export const PortalAnimation: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -31,6 +31,48 @@ export const PortalAnimation: React.FC = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
+    // Sprites pré-renderizados: desenhar uma imagem é muito mais barato que criar
+    // um gradiente radial por partícula a cada frame
+    const makeSprite = (r: number, g: number, b: number, size: number, stops: [number, number][]) => {
+      const sprite = document.createElement('canvas');
+      sprite.width = sprite.height = size;
+      const sctx = sprite.getContext('2d')!;
+      const grad = sctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+      stops.forEach(([offset, alpha]) => grad.addColorStop(offset, `rgba(${r}, ${g}, ${b}, ${alpha})`));
+      sctx.fillStyle = grad;
+      sctx.fillRect(0, 0, size, size);
+      return sprite;
+    };
+    const mistStops: [number, number][] = [[0, 1], [0.45, 0.5], [1, 0]];
+    const mistSprites = {
+      cyan: makeSprite(0, 240, 255, 128, mistStops),
+      sky: makeSprite(56, 189, 248, 128, mistStops),
+    };
+    const sparkStops: [number, number][] = [[0, 1], [0.3, 0.9], [0.5, 0.35], [1, 0]];
+    const sparkSprites = {
+      '#00f0ff': makeSprite(0, 240, 255, 32, sparkStops),
+      '#ffffff': makeSprite(255, 255, 255, 32, sparkStops),
+    };
+
+    let portalCenter = { x: canvas.width * 0.78, y: canvas.height * 0.45 };
+    const updatePortalCenter = () => {
+      if (containerRef.current) {
+        const portalRect = containerRef.current.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        portalCenter = {
+          x: portalRect.left - canvasRect.left + portalRect.width * 0.505,
+          y: portalRect.top - canvasRect.top + portalRect.height * 0.385,
+        };
+      }
+    };
+    updatePortalCenter();
+    const handleResize = () => {
+      resizeCanvas();
+      updatePortalCenter();
+    };
+    window.removeEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', handleResize);
+
     // Mist particle class
     interface MistParticle {
       x: number;
@@ -46,9 +88,7 @@ export const PortalAnimation: React.FC = () => {
       life: number;
       maxLife: number;
       scaleSpeed: number;
-      colorR: number;
-      colorG: number;
-      colorB: number;
+      sprite: HTMLCanvasElement;
       type: 'vortex' | 'ground' | 'ambient';
     }
 
@@ -62,27 +102,14 @@ export const PortalAnimation: React.FC = () => {
       alpha: number;
       life: number;
       maxLife: number;
-      color: string;
+      sprite: HTMLCanvasElement;
     }
 
     const mistParticles: MistParticle[] = [];
     const sparkParticles: SparkParticle[] = [];
 
     // Calculate current portal center relative to the wide canvas
-    const getPortalCenter = () => {
-      if (containerRef.current && canvas) {
-        const portalRect = containerRef.current.getBoundingClientRect();
-        const canvasRect = canvas.getBoundingClientRect();
-        return {
-          x: portalRect.left - canvasRect.left + portalRect.width * 0.505,
-          y: portalRect.top - canvasRect.top + portalRect.height * 0.385,
-        };
-      }
-      return {
-        x: canvas.width * 0.78,
-        y: canvas.height * 0.45,
-      };
-    };
+    const getPortalCenter = () => portalCenter;
 
     const createMist = (type: 'vortex' | 'ground' | 'ambient' = 'vortex'): MistParticle => {
       const center = getPortalCenter();
@@ -145,9 +172,7 @@ export const PortalAnimation: React.FC = () => {
         life: 0,
         maxLife,
         scaleSpeed: 0.4 + Math.random() * 0.45,
-        colorR: isCyan ? 0 : 56,
-        colorG: isCyan ? 240 : 189,
-        colorB: isCyan ? 255 : 248,
+        sprite: isCyan ? mistSprites.cyan : mistSprites.sky,
         type,
       };
     };
@@ -166,12 +191,12 @@ export const PortalAnimation: React.FC = () => {
         alpha: 0.9,
         life: 0,
         maxLife: 70 + Math.random() * 60,
-        color: Math.random() > 0.35 ? '#00f0ff' : '#ffffff',
+        sprite: Math.random() > 0.35 ? sparkSprites['#00f0ff'] : sparkSprites['#ffffff'],
       };
     };
 
     // Pre-população inicial de partículas para efeito imediato
-    for (let i = 0; i < 45; i++) {
+    for (let i = 0; i < 30; i++) {
       const type = i % 3 === 0 ? 'ground' : (i % 3 === 1 ? 'ambient' : 'vortex');
       const m = createMist(type);
       m.life = Math.random() * m.maxLife;
@@ -182,19 +207,23 @@ export const PortalAnimation: React.FC = () => {
     }
 
     let frame = 0;
+    let running = false;
+    let isVisible = false;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const render = () => {
+      if (!running) return;
       frame++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Spawn frequente de neblina para volume denso e contínuo
-      if (frame % 4 === 0 && mistParticles.length < 80) {
+      if (frame % 5 === 0 && mistParticles.length < 50) {
         const type = frame % 3 === 0 ? 'ground' : (frame % 3 === 1 ? 'ambient' : 'vortex');
         mistParticles.push(createMist(type));
       }
 
       // Spawn de partículas de energia
-      if (frame % 3 === 0 && sparkParticles.length < 40) {
+      if (frame % 4 === 0 && sparkParticles.length < 30) {
         sparkParticles.push(createSpark());
       }
 
@@ -219,21 +248,11 @@ export const PortalAnimation: React.FC = () => {
           continue;
         }
 
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rotation);
-
-        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, p.radius);
-        grad.addColorStop(0, `rgba(${p.colorR}, ${p.colorG}, ${p.colorB}, ${p.alpha})`);
-        grad.addColorStop(0.45, `rgba(${p.colorR}, ${p.colorG}, ${p.colorB}, ${p.alpha * 0.5})`);
-        grad.addColorStop(1, `rgba(${p.colorR}, ${p.colorG}, ${p.colorB}, 0)`);
-
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(0, 0, p.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
+        // Gradiente radial é simétrico: a rotação não muda o visual, então é dispensada
+        ctx.globalAlpha = p.alpha;
+        ctx.drawImage(p.sprite, p.x - p.radius, p.y - p.radius, p.radius * 2, p.radius * 2);
       }
+      ctx.globalAlpha = 1;
 
       // Atualização e renderização das fagulhas
       for (let i = sparkParticles.length - 1; i >= 0; i--) {
@@ -248,25 +267,46 @@ export const PortalAnimation: React.FC = () => {
           continue;
         }
 
-        ctx.fillStyle = s.color;
-        ctx.shadowColor = '#00f0ff';
-        ctx.shadowBlur = 8;
+        // Sprite com halo embutido substitui o shadowBlur (muito caro no canvas)
+        const glow = s.size * 4;
         ctx.globalAlpha = s.alpha;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1;
+        ctx.drawImage(s.sprite, s.x - glow, s.y - glow, glow * 2, glow * 2);
       }
+      ctx.globalAlpha = 1;
 
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    // Só anima enquanto o portal está visível e a aba está ativa
+    const start = () => {
+      if (running || prefersReducedMotion || document.hidden || !isVisible) return;
+      running = true;
+      updatePortalCenter();
+      animationFrameId = requestAnimationFrame(render);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) start();
+        else stop();
+      },
+      { rootMargin: '100px 0px' }
+    );
+    observer.observe(canvas);
+
+    const handleVisibility = () => (document.hidden ? stop() : start());
+    document.addEventListener('visibilitychange', handleVisibility);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      cancelAnimationFrame(animationFrameId);
+      stop();
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -284,7 +324,7 @@ export const PortalAnimation: React.FC = () => {
       >
         
         {/* Glow de fundo que se espalha para trás */}
-        <div className="absolute inset-0 bg-sky-500/25 blur-3xl rounded-full scale-125 pointer-events-none" />
+        <div className="absolute inset-0 bg-radial from-sky-500/25 to-transparent to-65% rounded-full scale-125 pointer-events-none" />
 
         {/* Imagem do Portal 100% Sem Bordas com Vignette e Gradientes de Fusão */}
         <div 
@@ -299,6 +339,8 @@ export const PortalAnimation: React.FC = () => {
             alt="Portal de Processo"
             className="w-full h-full object-cover object-center transform scale-[1.02]"
             referrerPolicy="no-referrer"
+            loading="lazy"
+            decoding="async"
           />
 
           {/* Gradientes de Fusão Suaves sem Linhas ou Bordas */}
@@ -328,11 +370,6 @@ export const PortalAnimation: React.FC = () => {
             {/* Anel Neon Central */}
             <motion.div
               animate={{
-                boxShadow: [
-                  '0 0 16px #00f0ff, 0 0 35px #00b4d8, inset 0 0 14px #00f0ff',
-                  '0 0 28px #38bdf8, 0 0 55px #00f0ff, inset 0 0 22px #38bdf8',
-                  '0 0 16px #00f0ff, 0 0 35px #00b4d8, inset 0 0 14px #00f0ff',
-                ],
                 scale: [1, 1.03, 1],
               }}
               transition={{
@@ -340,7 +377,7 @@ export const PortalAnimation: React.FC = () => {
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="w-16 h-16 sm:w-18 sm:h-18 rounded-full border-[2.5px] border-[#00f0ff] relative flex items-center justify-center bg-[#01081a]/50"
+              className="w-16 h-16 sm:w-18 sm:h-18 rounded-full border-[2.5px] border-[#00f0ff] shadow-[0_0_22px_#00f0ff,0_0_45px_#00b4d8,inset_0_0_18px_#00f0ff] relative flex items-center justify-center bg-[#01081a]/50"
             >
               {/* Feixe Shimmer de rotação */}
               <motion.div

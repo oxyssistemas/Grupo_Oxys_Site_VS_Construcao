@@ -23,12 +23,12 @@
 export const BRAND_CONFIG = {
   // 1. Logo que aparece no Cabeçalho (Navbar) e no Rodapé (Footer)
   // Deixe como '' para exibir a tipografia padrão ou adicione o caminho do arquivo (ex: '/logo.png')
-  HEADER_LOGO_SRC: '/logo png.png',
-  FOOTER_LOGO_SRC: '/logo png.png', // Se deixado vazio (''), usa automaticamente o mesmo HEADER_LOGO_SRC
+  HEADER_LOGO_SRC: '/logo.webp',
+  FOOTER_LOGO_SRC: '/logo.webp', // Se deixado vazio (''), usa automaticamente o mesmo HEADER_LOGO_SRC
 
   // 2. Logo / Imagem Central da Hero (aparece em destaque no núcleo iluminado da Hero)
   // Exemplo: '/logo-hero.png', '/logo.png' ou URL externa 'https://...'
-  HERO_CORE_LOGO_SRC: '/logo png.png',
+  HERO_CORE_LOGO_SRC: '/logo.webp',
 
   // 3. Textos institucionais da marca
   BRAND_NAME: 'OXYS',
@@ -68,9 +68,9 @@ export const BRAND_CONFIG = {
    *    automacao: '/automacao.jpg',
    */
   COMPANY_CARD_IMAGES: {
-    sistemas: '/sistemas.png', // Insira o caminho da imagem de Oxys Sistemas aqui
-    ti: '/ti.png',       // Insira o caminho da imagem de Oxys TI aqui
-    cloud: '/cloud.png',    // Insira o caminho da imagem de Oxys Cloud aqui
-    automacao: '/automação.png',// Insira o caminho da imagem de Oxys Automação aqui
+    sistemas: '/sistemas.webp', // Insira o caminho da imagem de Oxys Sistemas aqui
+    ti: '/ti.webp',       // Insira o caminho da imagem de Oxys TI aqui
+    cloud: '/cloud.webp',    // Insira o caminho da imagem de Oxys Cloud aqui
+    automacao: '/automacao.webp',// Insira o caminho da imagem de Oxys Automação aqui
   }
 };

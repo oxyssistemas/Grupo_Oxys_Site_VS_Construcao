@@ -22,6 +22,8 @@ export const CompanyImageSlot: React.FC<CompanyImageSlotProps> = ({
         <img
           src={customImg}
           alt={companyName}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#060b18] via-transparent to-transparent pointer-events-none opacity-80" />

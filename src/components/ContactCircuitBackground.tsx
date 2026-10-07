@@ -5,12 +5,12 @@ export const ContactCircuitBackground: React.FC = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {/* Luzes Volumétricas de Fundo com Profundidade Suave */}
-      <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-br from-blue-600/15 via-sky-500/10 to-transparent blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-gradient-to-tl from-cyan-500/12 via-blue-700/10 to-transparent blur-[130px] rounded-full pointer-events-none" />
-      <div className="absolute top-2/3 left-1/2 -translate-x-1/2 w-[380px] h-[380px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[550px] h-[550px] bg-radial from-blue-600/15 via-sky-500/10 to-transparent to-65% rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-radial from-cyan-500/12 via-blue-700/10 to-transparent to-65% rounded-full pointer-events-none" />
+      <div className="absolute top-2/3 left-1/2 -translate-x-1/2 w-[380px] h-[380px] bg-radial from-blue-500/10 to-transparent to-65% rounded-full pointer-events-none" />
 
       {/* SVG Circuit Canvas com Desfoque Óptico de Fundo (Depth of Field Blur) */}
-      <div className="w-full h-full opacity-45 md:opacity-55 filter blur-[2px] sm:blur-[2.5px] transition-opacity duration-1000">
+      <div className="w-full h-full opacity-45 md:opacity-55">
         <svg
           className="w-full h-full object-cover min-h-[850px]"
           viewBox="0 0 1440 900"
@@ -80,7 +80,6 @@ export const ContactCircuitBackground: React.FC = () => {
           <motion.circle
             r="4"
             fill="#00f0ff"
-            filter="url(#contactGlow)"
             initial={{ offsetDistance: '0%' }}
             animate={{ offsetDistance: '100%' }}
             transition={{
@@ -104,7 +103,6 @@ export const ContactCircuitBackground: React.FC = () => {
           <motion.circle
             r="3.5"
             fill="#38bdf8"
-            filter="url(#contactGlow)"
             initial={{ offsetDistance: '0%' }}
             animate={{ offsetDistance: '100%' }}
             transition={{
@@ -129,7 +127,6 @@ export const ContactCircuitBackground: React.FC = () => {
           <motion.circle
             r="3"
             fill="#ffffff"
-            filter="url(#contactGlow)"
             initial={{ offsetDistance: '0%' }}
             animate={{ offsetDistance: '100%' }}
             transition={{
@@ -157,7 +154,6 @@ export const ContactCircuitBackground: React.FC = () => {
           <motion.circle
             r="4"
             fill="#00f0ff"
-            filter="url(#contactGlow)"
             initial={{ offsetDistance: '0%' }}
             animate={{ offsetDistance: '100%' }}
             transition={{
@@ -182,7 +178,6 @@ export const ContactCircuitBackground: React.FC = () => {
           <motion.circle
             r="3.5"
             fill="#38bdf8"
-            filter="url(#contactGlow)"
             initial={{ offsetDistance: '0%' }}
             animate={{ offsetDistance: '100%' }}
             transition={{
@@ -207,7 +202,6 @@ export const ContactCircuitBackground: React.FC = () => {
           <motion.circle
             r="3"
             fill="#00f0ff"
-            filter="url(#contactGlow)"
             initial={{ offsetDistance: '0%' }}
             animate={{ offsetDistance: '100%' }}
             transition={{

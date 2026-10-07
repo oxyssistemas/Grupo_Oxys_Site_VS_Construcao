@@ -88,3 +88,20 @@
   animation: spinSlow 30s linear infinite;
 }
 
+
+/* Seções fora da tela não precisam animar (ver usePauseOffscreenSections) */
+section[data-offscreen] *,
+section[data-offscreen] *::before,
+section[data-offscreen] *::after {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

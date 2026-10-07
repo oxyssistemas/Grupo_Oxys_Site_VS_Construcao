@@ -89,8 +89,8 @@ export const TechCircuitNetwork: React.FC<TechCircuitNetworkProps> = ({
       className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu"
     >
       {/* Background Volumetric Core Light with smooth downward gradient dissipation */}
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 translate-x-12 w-[500px] h-[500px] bg-gradient-to-b from-blue-600/15 via-blue-500/10 to-transparent blur-[90px] rounded-full pointer-events-none transform-gpu" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 translate-x-12 w-[280px] h-[280px] bg-cyan-400/10 blur-[50px] rounded-full pointer-events-none transform-gpu" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 translate-x-12 w-[500px] h-[500px] bg-radial from-blue-600/15 via-blue-500/10 to-transparent to-65% rounded-full pointer-events-none transform-gpu" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 translate-x-12 w-[280px] h-[280px] bg-radial from-cyan-400/10 to-transparent to-65% rounded-full pointer-events-none transform-gpu" />
 
       {/* SVG Canvas for High-Definition Circuit Grid, PCB Traces and Micro-Vias */}
       <svg
@@ -231,7 +231,6 @@ export const TechCircuitNetwork: React.FC<TechCircuitNetworkProps> = ({
             strokeDasharray="20 8"
             fill="#030919"
             fillOpacity="0.8"
-            className="animate-pulse"
           />
 
           {/* Moldura Interna do Socket */}
@@ -292,54 +291,6 @@ export const TechCircuitNetwork: React.FC<TechCircuitNetworkProps> = ({
           <circle cx="0" cy="0" r="6" fill="#00f0ff" filter="url(#subtleGlowHD)" />
           <circle cx="0" cy="0" r="2" fill="#ffffff" />
 
-          {/* Partículas e Faíscas Sutis Emanando do Núcleo */}
-          {[
-            { angle: 25, dist: 125, dur: '3.6s', delay: '0s', size: 2.5, color: '#00f0ff' },
-            { angle: 75, dist: 100, dur: '4.2s', delay: '0.7s', size: 2, color: '#38bdf8' },
-            { angle: 130, dist: 145, dur: '5.0s', delay: '1.2s', size: 2.2, color: '#60a5fa' },
-            { angle: 190, dist: 115, dur: '3.8s', delay: '0.4s', size: 2.5, color: '#00f0ff' },
-            { angle: 245, dist: 135, dur: '4.6s', delay: '1.6s', size: 2, color: '#38bdf8' },
-            { angle: 305, dist: 110, dur: '3.4s', delay: '0.9s', size: 2.8, color: '#00f0ff' },
-            { angle: 345, dist: 130, dur: '4.8s', delay: '2.1s', size: 1.8, color: '#93c5fd' },
-          ].map((sp, idx) => {
-            const rad = (sp.angle * Math.PI) / 180;
-            const targetX = Math.cos(rad) * sp.dist;
-            const targetY = Math.sin(rad) * sp.dist;
-            return (
-              <g key={`spark-${idx}`}>
-                <circle cx="0" cy="0" r={sp.size} fill={sp.color} filter="url(#subtleGlowHD)">
-                  <animate
-                    attributeName="cx"
-                    values={`0; ${targetX * 0.4}; ${targetX}`}
-                    dur={sp.dur}
-                    begin={sp.delay}
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="cy"
-                    values={`0; ${targetY * 0.4}; ${targetY}`}
-                    dur={sp.dur}
-                    begin={sp.delay}
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    values="0; 0.9; 0.6; 0"
-                    dur={sp.dur}
-                    begin={sp.delay}
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="r"
-                    values={`${sp.size * 0.5}; ${sp.size}; ${sp.size * 0.3}`}
-                    dur={sp.dur}
-                    begin={sp.delay}
-                    repeatCount="indefinite"
-                  />
-                </circle>
-              </g>
-            );
-          })}
         </g>
 
 
@@ -663,6 +614,67 @@ export const TechCircuitNetwork: React.FC<TechCircuitNetworkProps> = ({
           <circle cx="1020" cy="80" r="2" fill="#0369a1" />
         </g>
 
+
+      </svg>
+
+      {/* Camada animada separada: as partículas se movem sem forçar o redesenho das trilhas com filtros */}
+      <svg
+        className="absolute inset-0 w-full h-full min-h-[700px] will-change-transform"
+        viewBox="0 0 1440 900"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <g transform="translate(1080, 450)">
+          {/* Partículas e Faíscas Sutis Emanando do Núcleo */}
+          {[
+            { angle: 25, dist: 125, dur: '3.6s', delay: '0s', size: 2.5, color: '#00f0ff' },
+            { angle: 75, dist: 100, dur: '4.2s', delay: '0.7s', size: 2, color: '#38bdf8' },
+            { angle: 130, dist: 145, dur: '5.0s', delay: '1.2s', size: 2.2, color: '#60a5fa' },
+            { angle: 190, dist: 115, dur: '3.8s', delay: '0.4s', size: 2.5, color: '#00f0ff' },
+            { angle: 245, dist: 135, dur: '4.6s', delay: '1.6s', size: 2, color: '#38bdf8' },
+            { angle: 305, dist: 110, dur: '3.4s', delay: '0.9s', size: 2.8, color: '#00f0ff' },
+            { angle: 345, dist: 130, dur: '4.8s', delay: '2.1s', size: 1.8, color: '#93c5fd' },
+          ].map((sp, idx) => {
+            const rad = (sp.angle * Math.PI) / 180;
+            const targetX = Math.cos(rad) * sp.dist;
+            const targetY = Math.sin(rad) * sp.dist;
+            return (
+              <g key={`spark-${idx}`}>
+                <circle cx="0" cy="0" r={sp.size} fill={sp.color}>
+                  <animate
+                    attributeName="cx"
+                    values={`0; ${targetX * 0.4}; ${targetX}`}
+                    dur={sp.dur}
+                    begin={sp.delay}
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="cy"
+                    values={`0; ${targetY * 0.4}; ${targetY}`}
+                    dur={sp.dur}
+                    begin={sp.delay}
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="0; 0.9; 0.6; 0"
+                    dur={sp.dur}
+                    begin={sp.delay}
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="r"
+                    values={`${sp.size * 0.5}; ${sp.size}; ${sp.size * 0.3}`}
+                    dur={sp.dur}
+                    begin={sp.delay}
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              </g>
+            );
+          })}
+        </g>
 
         {/* 
           ===========================================================================

@@ -108,13 +108,13 @@ export const BlogSection: React.FC = () => {
   return (
     <section id="blog" className="py-24 relative bg-[#02050e] border-t border-slate-900 scroll-mt-12 overflow-hidden">
       {/* Glow */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-radial from-blue-600/10 to-transparent to-65% rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2, margin: '-40px 0px' }}
           transition={{ duration: 0.65, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="flex flex-col md:flex-row md:items-end justify-between gap-6"
@@ -159,8 +159,8 @@ export const BlogSection: React.FC = () => {
           {filteredPosts.map((post, idx) => (
             <motion.article
               key={post.id}
-              initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15, margin: '-40px 0px' }}
               transition={{
                 duration: 0.6,

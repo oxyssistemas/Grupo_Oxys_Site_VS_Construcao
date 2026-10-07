@@ -48,13 +48,11 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       initial={{
         opacity: 0,
         ...initialPos,
-        filter: blur ? 'blur(8px)' : 'none',
       }}
       whileInView={{
         opacity: 1,
         x: 0,
         y: 0,
-        filter: 'blur(0px)',
       }}
       viewport={{
         once,
@@ -89,12 +87,10 @@ export const staggerItemVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 28,
-    filter: 'blur(6px)',
   },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: {
       duration: 0.65,
       ease: [0.21, 0.47, 0.32, 0.98],

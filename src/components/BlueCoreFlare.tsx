@@ -34,7 +34,7 @@ export const BlueCoreFlare: React.FC<BlueCoreFlareProps> = ({ logoSrc }) => {
           opacity: { duration: 1, delay: 0.1 },
           scale: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
         }}
-        className="absolute w-[320px] sm:w-[420px] lg:w-[480px] h-[320px] sm:h-[420px] lg:h-[480px] rounded-full bg-gradient-to-r from-blue-600/30 via-[#0088ff]/35 to-cyan-400/20 blur-[60px] sm:blur-[75px] pointer-events-none transform-gpu"
+        className="absolute w-[320px] sm:w-[420px] lg:w-[480px] h-[320px] sm:h-[420px] lg:h-[480px] rounded-full bg-radial from-[#0088ff]/35 via-blue-600/20 to-transparent to-65% pointer-events-none will-change-transform"
       />
 
       {/* 2. Núcleo de Alta Intensidade Ciano/Azul */}
@@ -48,7 +48,7 @@ export const BlueCoreFlare: React.FC<BlueCoreFlareProps> = ({ logoSrc }) => {
           opacity: { duration: 0.8, delay: 0.2 },
           scale: { duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.2 },
         }}
-        className="absolute w-[180px] sm:w-[220px] h-[180px] sm:h-[220px] rounded-full bg-gradient-radial from-[#38bdf8]/60 via-[#0088ff]/40 to-transparent blur-[35px] sm:blur-[45px] pointer-events-none transform-gpu"
+        className="absolute w-[180px] sm:w-[220px] h-[180px] sm:h-[220px] rounded-full bg-gradient-radial from-[#38bdf8]/60 via-[#0088ff]/40 to-transparent pointer-events-none"
       />
 
       {/* 3. Feixe de Luz Anamórfico Horizontal */}
@@ -96,7 +96,7 @@ export const BlueCoreFlare: React.FC<BlueCoreFlareProps> = ({ logoSrc }) => {
           opacity: { duration: 1, delay: 0.3 },
           scale: { duration: 2.2, repeat: Infinity, ease: 'easeInOut' },
         }}
-        className="absolute w-12 h-12 rounded-full bg-white/40 blur-[8px] pointer-events-none"
+        className="absolute w-16 h-16 rounded-full bg-radial from-white/50 to-transparent to-65% pointer-events-none will-change-transform"
       />
 
       {/* 
@@ -117,12 +117,13 @@ export const BlueCoreFlare: React.FC<BlueCoreFlareProps> = ({ logoSrc }) => {
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="w-full h-full flex items-center justify-center pointer-events-none select-none"
+            className="w-full h-full flex items-center justify-center pointer-events-none select-none will-change-transform"
           >
             <img
               src={activeImage}
               alt={`${BRAND_CONFIG.BRAND_NAME} Hero Core Visual`}
               draggable={false}
+              fetchPriority="high"
               className="max-w-[85%] max-h-[85%] w-auto h-auto object-contain filter drop-shadow-[0_12px_45px_rgba(0,140,255,0.85)] drop-shadow-[0_0_35px_rgba(56,189,248,0.7)] pointer-events-none select-none"
             />
           </motion.div>

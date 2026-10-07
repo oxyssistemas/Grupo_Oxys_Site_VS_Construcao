@@ -26,8 +26,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onSelectCompany }) =
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2, margin: '-40px 0px' }}
           transition={{ duration: 0.65, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="text-center max-w-3xl mx-auto"
@@ -51,8 +51,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onSelectCompany }) =
         {/* 2-Column Overview */}
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30, filter: 'blur(6px)' }}
-            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2, margin: '-40px 0px' }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
@@ -94,8 +94,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onSelectCompany }) =
 
           {/* Comparison Table: Traditional vs. Grupo Oxys */}
           <motion.div
-            initial={{ opacity: 0, x: 30, filter: 'blur(6px)' }}
-            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2, margin: '-40px 0px' }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="p-8 rounded-3xl bg-[#080d1c] border border-blue-500/20 shadow-[0_15px_40px_rgba(0,0,0,0.7)]"

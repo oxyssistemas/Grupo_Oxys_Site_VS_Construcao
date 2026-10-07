@@ -87,16 +87,16 @@ export const ProcessSection: React.FC = () => {
   return (
     <section id="processos" className="relative py-12 sm:py-16 bg-[#02050e] overflow-hidden scroll-mt-20">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] h-[350px] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[300px] bg-sky-500/10 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] h-[350px] bg-radial from-blue-600/10 to-transparent to-65% rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[300px] bg-radial from-sky-500/10 to-transparent to-65% rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Container Principal do Card de Processo */}
         <motion.div
           id="process-card-container"
-          initial={{ opacity: 0, y: 32, filter: 'blur(8px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15, margin: '-50px 0px' }}
           transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="relative rounded-[28px] bg-gradient-to-b from-[#060d1e] via-[#040816] to-[#030612] border border-[#14223b] shadow-[0_20px_50px_rgba(0,0,0,0.85)] p-6 sm:p-8 lg:p-10 overflow-hidden"
@@ -227,7 +227,7 @@ export const ProcessSection: React.FC = () => {
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="absolute right-0 top-1/4 w-[650px] h-[300px] bg-gradient-to-l from-sky-400/25 via-cyan-500/15 to-transparent blur-3xl rounded-full"
+              className="absolute right-0 top-1/4 w-[650px] h-[300px] bg-radial from-sky-400/25 via-cyan-500/15 to-transparent to-65% rounded-full"
             />
 
             {/* Onda 2 de Neblina Baixa Flutuante sobre o chão */}
@@ -243,7 +243,7 @@ export const ProcessSection: React.FC = () => {
                 ease: 'easeInOut',
                 delay: 3,
               }}
-              className="absolute right-0 bottom-0 w-[750px] h-[240px] bg-gradient-to-l from-cyan-400/20 via-blue-500/10 to-transparent blur-3xl rounded-full"
+              className="absolute right-0 bottom-0 w-[750px] h-[240px] bg-radial from-cyan-400/20 via-blue-500/10 to-transparent to-65% rounded-full"
             />
 
             {/* Onda 3 de Névoa Celestial Central */}
@@ -259,7 +259,7 @@ export const ProcessSection: React.FC = () => {
                 ease: 'easeInOut',
                 delay: 6,
               }}
-              className="absolute right-10 top-1/2 -translate-y-1/2 w-[600px] h-[280px] bg-gradient-to-l from-[#00f0ff]/15 via-sky-600/10 to-transparent blur-[80px] rounded-full"
+              className="absolute right-10 top-1/2 -translate-y-1/2 w-[600px] h-[280px] bg-radial from-[#00f0ff]/15 via-sky-600/10 to-transparent to-65% rounded-full"
             />
           </div>
 

@@ -44,9 +44,9 @@ export const Hero: React.FC<HeroProps> = ({
       className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-0 lg:pt-32 lg:pb-0 overflow-hidden bg-gradient-to-b from-[#020614] via-[#040c20] via-60% to-[#02050e]"
     >
       {/* Luzes fluidas de fundo em degradê orgânico (sem cortes bruscos) */}
-      <div className="absolute top-1/4 -left-20 w-[550px] h-[550px] bg-gradient-to-br from-blue-600/10 via-indigo-700/5 to-transparent blur-[160px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-[650px] h-[650px] bg-gradient-to-br from-blue-600/18 via-sky-500/10 to-transparent blur-[180px] rounded-full pointer-events-none" />
-      <div className="absolute -bottom-24 left-1/3 w-[600px] h-[400px] bg-gradient-to-t from-sky-600/8 via-blue-900/5 to-transparent blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/4 -left-20 w-[550px] h-[550px] bg-radial from-blue-600/10 via-indigo-700/5 to-transparent to-65% rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[650px] h-[650px] bg-radial from-blue-600/18 via-sky-500/10 to-transparent to-65% rounded-full pointer-events-none" />
+      <div className="absolute -bottom-24 left-1/3 w-[600px] h-[400px] bg-radial from-sky-600/8 via-blue-900/5 to-transparent to-65% rounded-full pointer-events-none" />
 
       {/* Dynamic Cyber Tech Circuits Background Network */}
       <TechCircuitNetwork hoveredCompany={hoveredCompany} stage={stage} />
@@ -156,8 +156,8 @@ export const Hero: React.FC<HeroProps> = ({
               className="absolute inset-0 flex items-center justify-center pointer-events-none transform-gpu"
             >
               {/* Central Core Volumetric Glow */}
-              <div className="w-[300px] sm:w-[360px] h-[300px] sm:h-[360px] rounded-full bg-blue-600/25 blur-[60px] transform-gpu" />
-              <div className="w-[160px] sm:w-[200px] h-[160px] sm:h-[200px] rounded-full bg-cyan-400/15 blur-[40px] transform-gpu" />
+              <div className="w-[300px] sm:w-[360px] h-[300px] sm:h-[360px] rounded-full bg-radial from-blue-600/25 to-transparent to-65% transform-gpu" />
+              <div className="w-[160px] sm:w-[200px] h-[160px] sm:h-[200px] rounded-full bg-radial from-cyan-400/15 to-transparent to-65% transform-gpu" />
               
               {/* Computer Circuit Motherboard Central Hub (SVG) */}
               <svg
@@ -379,7 +379,7 @@ export const Hero: React.FC<HeroProps> = ({
                 !isContentRevealed ? 'pointer-events-none' : ''
               }`}
             >
-              <div className="p-3.5 sm:p-5 rounded-2xl bg-[#090e1c]/90 border border-slate-800/90 backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.8)] max-w-[190px] sm:max-w-[230px]">
+              <div className="p-3.5 sm:p-5 rounded-2xl bg-[#090e1c]/90 border border-slate-800/90 shadow-[0_15px_35px_rgba(0,0,0,0.8)] max-w-[190px] sm:max-w-[230px]">
                 <span className="text-[9px] sm:text-[11px] font-bold text-[#0099ff] tracking-[0.16em] uppercase font-rajdhani block">
                   ESPECIALISTAS EM
                 </span>
@@ -421,7 +421,7 @@ export const Hero: React.FC<HeroProps> = ({
                 !isContentRevealed ? 'pointer-events-none' : ''
               }`}
             >
-              <div className="p-3.5 sm:p-5 rounded-2xl bg-[#090e1c]/90 border border-slate-800/90 backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.8)] min-w-[150px] sm:min-w-[190px]">
+              <div className="p-3.5 sm:p-5 rounded-2xl bg-[#090e1c]/90 border border-slate-800/90 shadow-[0_15px_35px_rgba(0,0,0,0.8)] min-w-[150px] sm:min-w-[190px]">
                 <span className="text-[9px] sm:text-[11px] font-bold text-[#0099ff] tracking-[0.16em] uppercase font-rajdhani block">
                   EXPERIÊNCIA
                 </span>
@@ -463,7 +463,7 @@ export const Hero: React.FC<HeroProps> = ({
                 !isContentRevealed ? 'pointer-events-none' : ''
               }`}
             >
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#090e1c]/90 border border-slate-800/90 backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.8)] min-w-[175px] sm:min-w-[195px]">
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#090e1c]/90 border border-slate-800/90 shadow-[0_15px_35px_rgba(0,0,0,0.8)] min-w-[175px] sm:min-w-[195px]">
                 <span className="text-[10px] sm:text-[11px] font-bold text-[#0099ff] tracking-[0.16em] uppercase font-rajdhani block">
                   FOCO EM
                 </span>

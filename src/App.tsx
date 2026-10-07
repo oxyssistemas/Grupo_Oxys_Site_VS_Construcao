@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
+import { motion, MotionConfig } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { CompaniesGrid } from './components/CompaniesGrid';
@@ -11,6 +11,16 @@ import { Footer } from './components/Footer';
 import { CompanyModal } from './components/CompanyModal';
 import { CompanyId, Company } from './types';
 import { COMPANIES_DATA } from './data/companies';
+import { usePauseOffscreenSections } from './hooks/usePauseOffscreenSections';
+
+// Evita re-renderizar seções pesadas quando só o hover dos cards muda
+const MemoServicesTechSection = memo(ServicesTechSection);
+const MemoProcessSection = memo(ProcessSection);
+const MemoAboutSection = memo(AboutSection);
+const MemoContactSection = memo(ContactSection);
+const MemoFooter = memo(Footer);
+const MemoNavbar = memo(Navbar);
+const MemoCompanyModal = memo(CompanyModal);
 
 export type IgnitionStage = 'black' | 'core' | 'circuits' | 'revealed';
 
@@ -45,19 +55,22 @@ export default function App() {
     };
   }, []);
 
-  const selectedCompany: Company | null = selectedCompanyId
-    ? COMPANIES_DATA.find((c) => c.id === selectedCompanyId) || null
-    : null;
+  const selectedCompany: Company | null = useMemo(
+    () => (selectedCompanyId ? COMPANIES_DATA.find((c) => c.id === selectedCompanyId) || null : null),
+    [selectedCompanyId]
+  );
 
-  const handleOpenCompanyModal = (companyId: CompanyId) => {
+  usePauseOffscreenSections();
+
+  const handleOpenCompanyModal = useCallback((companyId: CompanyId) => {
     setSelectedCompanyId(companyId);
-  };
+  }, []);
 
-  const handleCloseCompanyModal = () => {
+  const handleCloseCompanyModal = useCallback(() => {
     setSelectedCompanyId(null);
-  };
+  }, []);
 
-  const handleOpenContact = (preselectedUnit?: CompanyId) => {
+  const handleOpenContact = useCallback((preselectedUnit?: CompanyId) => {
     if (preselectedUnit) {
       setContactPreselectedUnit(preselectedUnit);
     }
@@ -65,11 +78,14 @@ export default function App() {
     if (contactElem) {
       contactElem.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
+
+  const handleOpenContactGeneric = useCallback(() => handleOpenContact(), [handleOpenContact]);
 
   const isRevealed = stage === 'revealed';
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-[#02050e] text-slate-100 selection:bg-blue-500 selection:text-white flex flex-col overflow-x-hidden">
       {/* Top Navbar: Revelada apenas ao término da animação */}
       <motion.div
@@ -78,7 +94,7 @@ export default function App() {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className={!isRevealed ? 'pointer-events-none' : ''}
       >
-        <Navbar
+        <MemoNavbar
           onSelectCompany={handleOpenCompanyModal}
           onOpenContact={handleOpenContact}
         />
@@ -89,7 +105,7 @@ export default function App() {
         <Hero
           hoveredCompany={hoveredCompany}
           onSelectCompany={handleOpenCompanyModal}
-          onOpenContact={() => handleOpenContact()}
+          onOpenContact={handleOpenContactGeneric}
           stage={stage}
         />
 
@@ -105,20 +121,20 @@ export default function App() {
             hoveredCompany={hoveredCompany}
             onHoverCompany={setHoveredCompany}
             onSelectCompany={handleOpenCompanyModal}
-            onRequestQuoteForCompany={(companyId) => handleOpenContact(companyId)}
+            onRequestQuoteForCompany={handleOpenContact}
           />
 
           {/* Services & Technologies Showcase Section */}
-          <ServicesTechSection />
+          <MemoServicesTechSection />
 
           {/* Nosso Processo Showcase Section */}
-          <ProcessSection />
+          <MemoProcessSection />
 
           {/* About Group Structure & Differentials */}
-          <AboutSection onSelectCompany={handleOpenCompanyModal} />
+          <MemoAboutSection onSelectCompany={handleOpenCompanyModal} />
 
           {/* Interactive Proposal & Contact Section */}
-          <ContactSection
+          <MemoContactSection
             preselectedUnit={contactPreselectedUnit}
             preselectedSolution={contactPreselectedSolution}
           />
@@ -132,19 +148,20 @@ export default function App() {
         transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
         className={!isRevealed ? 'pointer-events-none' : ''}
       >
-        <Footer
+        <MemoFooter
           onSelectCompany={handleOpenCompanyModal}
-          onOpenContact={() => handleOpenContact()}
+          onOpenContact={handleOpenContactGeneric}
         />
       </motion.div>
 
       {/* Deep Dive Company Detail Modal */}
-      <CompanyModal
+      <MemoCompanyModal
         company={selectedCompany}
         isOpen={!!selectedCompanyId}
         onClose={handleCloseCompanyModal}
-        onOpenContactWithCompany={(companyId) => handleOpenContact(companyId)}
+        onOpenContactWithCompany={handleOpenContact}
       />
     </div>
+    </MotionConfig>
   );
 }

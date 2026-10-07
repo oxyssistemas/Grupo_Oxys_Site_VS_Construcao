@@ -15,7 +15,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectCompany, onOpenContact }
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    // Processa no máximo uma vez por frame (o evento de scroll dispara dezenas de vezes por frame)
+    let ticking = false;
     const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        updateFromScroll();
+      });
+    };
+
+    const updateFromScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
       // Simple active link detection based on scroll position
@@ -86,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectCompany, onOpenContact }
       id="main-navbar"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#02050e]/95 backdrop-blur-md border-b border-blue-950/40 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.85)]'
+          ? 'bg-[#02050e]/95 border-b border-blue-950/40 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.85)]'
           : 'bg-gradient-to-b from-[#02050e]/90 via-[#02050e]/50 to-transparent py-5'
       }`}
     >
@@ -175,7 +186,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectCompany, onOpenContact }
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="lg:hidden bg-[#02050e]/98 border-b border-blue-900/30 backdrop-blur-2xl overflow-hidden"
+            className="lg:hidden bg-[#02050e]/98 border-b border-blue-900/30 overflow-hidden"
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-4">
               <nav className="flex flex-col space-y-2">

@@ -165,7 +165,7 @@ export const CircuitConduitBridge: React.FC<CircuitConduitBridgeProps> = ({
             <circle cx="255" cy="174" r="1.8" fill="#ffffff" />
 
             {/* Pulso de energia contínuo */}
-            <circle r="3.5" fill="#00f0ff" filter="url(#nodeHaloHD)">
+            <circle r="4" fill="#00f0ff" fillOpacity="0.55">
               <animateMotion
                 path="M 980 0 L 980 20 L 950 50 L 285 50 L 255 80 L 255 174"
                 dur={hoveredCompany === 'sistemas' ? '1.2s' : '3.6s'}
@@ -215,7 +215,7 @@ export const CircuitConduitBridge: React.FC<CircuitConduitBridgeProps> = ({
             <circle cx="565" cy="174" r="1.8" fill="#ffffff" />
 
             {/* Pulso de energia */}
-            <circle r="3.5" fill="#00f0ff" filter="url(#nodeHaloHD)">
+            <circle r="4" fill="#00f0ff" fillOpacity="0.55">
               <animateMotion
                 path="M 1010 0 L 1010 32 L 980 62 L 595 62 L 565 92 L 565 174"
                 dur={hoveredCompany === 'ti' ? '1.2s' : '3.2s'}
@@ -267,7 +267,7 @@ export const CircuitConduitBridge: React.FC<CircuitConduitBridgeProps> = ({
             <circle cx="875" cy="174" r="1.8" fill="#ffffff" />
 
             {/* Pulso de energia */}
-            <circle r="3.5" fill="#00f0ff" filter="url(#nodeHaloHD)">
+            <circle r="4" fill="#00f0ff" fillOpacity="0.55">
               <animateMotion
                 path="M 1040 0 L 1040 44 L 1010 74 L 905 74 L 875 104 L 875 174"
                 dur={hoveredCompany === 'cloud' ? '1.2s' : '3.0s'}
@@ -317,7 +317,7 @@ export const CircuitConduitBridge: React.FC<CircuitConduitBridgeProps> = ({
             <circle cx="1185" cy="174" r="1.8" fill="#ffffff" />
 
             {/* Pulso de energia */}
-            <circle r="3.5" fill="#00f0ff" filter="url(#nodeHaloHD)">
+            <circle r="4" fill="#00f0ff" fillOpacity="0.55">
               <animateMotion
                 path="M 1150 0 L 1150 30 L 1175 55 L 1185 65 L 1185 174"
                 dur={hoveredCompany === 'automacao' ? '1.2s' : '3.4s'}

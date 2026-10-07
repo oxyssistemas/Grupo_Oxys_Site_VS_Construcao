@@ -69,8 +69,8 @@ export const CompaniesGrid: React.FC<CompaniesGridProps> = ({
     <section id="work" className="relative bg-gradient-to-b from-[#02050e] via-[#040a1c] to-[#02050e] pb-24 pt-0 overflow-hidden scroll-mt-12">
       
       {/* Luz volumétrica contínua com degradê suave e fluido */}
-      <div className="absolute -top-24 right-1/4 w-[650px] h-[400px] bg-gradient-to-b from-blue-600/12 via-sky-500/6 to-transparent blur-[160px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 left-10 w-[500px] h-[500px] bg-gradient-to-tr from-indigo-700/8 via-sky-600/4 to-transparent blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute -top-24 right-1/4 w-[650px] h-[400px] bg-radial from-blue-600/12 via-sky-500/6 to-transparent to-65% rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-10 w-[500px] h-[500px] bg-radial from-indigo-700/8 via-sky-600/4 to-transparent to-65% rounded-full pointer-events-none" />
       
       {/* Grid de continuidade com máscara de transição ultra suave */}
       <div className="absolute top-0 left-0 right-0 h-96 bg-[linear-gradient(to_right,#0e1a33_1px,transparent_1px),linear-gradient(to_bottom,#0e1a33_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.06)_60%,transparent_100%)] opacity-20 pointer-events-none" />
@@ -94,8 +94,8 @@ export const CompaniesGrid: React.FC<CompaniesGridProps> = ({
             return (
               <motion.div
                 key={company.id}
-                initial={{ opacity: 0, y: 32, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15, margin: '-40px 0px' }}
                 transition={{
                   duration: 0.65,

@@ -101,8 +101,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2, margin: '-40px 0px' }}
           transition={{ duration: 0.65, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="text-center max-w-3xl mx-auto mb-16"
@@ -126,8 +126,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Group Contact Info Cards (Left Column) */}
           <motion.div
-            initial={{ opacity: 0, x: -30, filter: 'blur(6px)' }}
-            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.15, margin: '-40px 0px' }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="lg:col-span-5 space-y-6"
@@ -226,8 +226,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
           {/* Interactive Proposal Form (Right Column) */}
           <motion.div
-            initial={{ opacity: 0, x: 30, filter: 'blur(6px)' }}
-            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.15, margin: '-40px 0px' }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="lg:col-span-7"
