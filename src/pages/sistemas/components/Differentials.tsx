@@ -6,7 +6,6 @@ import {
   Users, 
   FileCode, 
   Lock, 
-  Star, 
   Quote, 
   CheckCircle2, 
   Sparkles,
@@ -15,7 +14,8 @@ import {
   Cpu,
   Terminal
 } from 'lucide-react';
-import { TESTIMONIALS, COMPANY_INFO } from '../data/mockData';
+import { COMPANY_INFO } from '../data/mockData';
+import { BRAND_CONFIG } from '../../../config/brandAssets';
 import { ScrollReveal, StaggerContainer, StaggerItem } from './ScrollReveal';
 import { MilkyWayBackground } from './MilkyWayBackground';
 import { GalacticTelemetryBadge, StardustDivider } from './MilkyWayDecorations';
@@ -164,7 +164,7 @@ export const Differentials: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             {/* Left Interactive Logo & Brand Showcase Stage */}
             <div className="lg:col-span-5 flex items-center justify-center py-2">
-              <LogoBrandShowcase />
+              <LogoBrandShowcase logoSrc={BRAND_CONFIG.HEADER_LOGO_SRC} logoAlt="Logo Oxys Sistemas" />
             </div>
 
             {/* Right Architecture Highlights */}
@@ -206,7 +206,7 @@ export const Differentials: React.FC = () => {
         </ScrollReveal>
 
         {/* 6 Engineering Pillars with Colorful Themes & Staggered Scroll Reveal */}
-        <StaggerContainer staggerDelay={0.09} delayChildren={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <StaggerContainer staggerDelay={0.09} delayChildren={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             const theme = pillar.theme;
@@ -247,69 +247,6 @@ export const Differentials: React.FC = () => {
             );
           })}
         </StaggerContainer>
-
-        {/* Client Testimonials Carousel / Grid */}
-        <div className="pt-12 border-t border-white/5">
-          <ScrollReveal direction="up" duration={0.65} distance={25} className="text-center max-w-2xl mx-auto mb-12">
-            <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-cyan-400 mb-1">
-              Feedback & Avaliações de Clientes
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              O que dizem os Líderes de Tecnologia
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-400 mt-2">
-              Depoimentos reais de executivos e gestores de tecnologia que confiaram seus produtos à Oxys Sistemas.
-            </p>
-          </ScrollReveal>
-
-          <StaggerContainer staggerDelay={0.12} delayChildren={0.15} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((test, index) => {
-              const testColors = [
-                { border: 'hover:border-cyan-500/40', star: 'text-cyan-400', badge: 'bg-cyan-950/80 text-cyan-300 border-cyan-500/30' },
-                { border: 'hover:border-emerald-500/40', star: 'text-emerald-400', badge: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/30' },
-                { border: 'hover:border-purple-500/40', star: 'text-purple-400', badge: 'bg-purple-950/80 text-purple-300 border-purple-500/30' },
-              ];
-              const tStyle = testColors[index % testColors.length];
-
-              return (
-                <StaggerItem
-                  key={test.id}
-                  className={`p-6 rounded-2xl bg-[#0a0c10]/90 border border-white/10 ${tStyle.border} flex flex-col justify-between space-y-4 shadow-xl transition-all duration-300 hover:-translate-y-1.5`}
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className={`flex gap-1 ${tStyle.star}`}>
-                        {[...Array(test.rating)].map((_, i) => (
-                          <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                        ))}
-                      </div>
-                      <span className={`text-[9px] font-mono px-2.5 py-0.5 rounded border uppercase tracking-wider font-semibold ${tStyle.badge}`}>
-                        {test.projectDelivered}
-                      </span>
-                    </div>
-
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
-                      "{test.content}"
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-3 pt-4 border-t border-white/5">
-                    <img
-                      src={test.avatar}
-                      alt={test.name}
-                      className="w-10 h-10 rounded-full object-cover border border-cyan-500/30"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div>
-                      <h4 className="text-xs font-bold text-white">{test.name}</h4>
-                      <p className="text-[10px] font-mono text-slate-400">{test.role} • {test.company}</p>
-                    </div>
-                  </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
-        </div>
 
       </div>
     </section>
