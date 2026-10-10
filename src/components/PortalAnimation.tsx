@@ -462,7 +462,7 @@ export const PortalAnimation: React.FC = () => {
       */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible"
+        className="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible will-change-transform"
         style={{
           position: 'absolute',
           left: 0,

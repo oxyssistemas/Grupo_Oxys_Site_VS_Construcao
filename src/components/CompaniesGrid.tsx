@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { CompanyId } from '../types';
@@ -55,10 +56,15 @@ export const CompaniesGrid: React.FC<CompaniesGridProps> = ({
   onHoverCompany,
   onSelectCompany,
 }) => {
+  const navigate = useNavigate();
+
   const handleRedirect = (e: React.MouseEvent, companyId: CompanyId) => {
     e.stopPropagation();
     const url = BRAND_CONFIG.COMPANY_WEBSITES?.[companyId];
-    if (url && url !== '#' && url.startsWith('http')) {
+    if (url && url.startsWith('/')) {
+      // Página interna do site (ex.: /sistemas)
+      navigate(url);
+    } else if (url && url !== '#' && url.startsWith('http')) {
       window.open(url, '_blank', 'noopener,noreferrer');
     } else {
       onSelectCompany(companyId);
@@ -139,7 +145,7 @@ export const CompaniesGrid: React.FC<CompaniesGridProps> = ({
                 */}
                 <div
                   id={`company-card-${company.id}`}
-                  onClick={() => onSelectCompany(company.id)}
+                  onClick={(e) => handleRedirect(e, company.id)}
                   className={`w-full h-full group relative rounded-[22px] bg-[#060b18] transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.85)] ${
                     isHovered
                       ? 'border border-[#00f0ff] shadow-[0_16px_50px_rgba(0,240,255,0.22)] -translate-y-1'

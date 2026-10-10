@@ -50,7 +50,7 @@ export const BRAND_CONFIG = {
 
   // 5. Links dos Sites das 4 Empresas do Grupo (Redirecionamento ao clicar no botão com seta)
   COMPANY_WEBSITES: {
-    sistemas: 'https://sistemas.oxys.com.br', // Link do site Oxys Sistemas
+    sistemas: '/sistemas',                     // Página da Oxys Sistemas dentro deste site
     ti: 'https://ti.oxys.com.br',             // Link do site Oxys TI
     cloud: 'https://cloud.oxys.com.br',       // Link do site Oxys Cloud
     automacao: 'https://automacao.oxys.com.br', // Link do site Oxys Automação

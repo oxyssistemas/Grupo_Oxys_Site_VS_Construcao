@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Code2,
   Server,
@@ -86,29 +87,24 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCompany, onOpenContact }
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <a href="#home" className="hover:text-white transition-colors">
+                <Link to="/" className="hover:text-white transition-colors">
                   HOME
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#work" className="hover:text-white transition-colors">
-                  WORK (Portfólio)
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="hover:text-white transition-colors">
+                <Link to="/#about" className="hover:text-white transition-colors">
                   ABOUT (Sobre Nós)
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#servicos" className="hover:text-white transition-colors">
+                <Link to="/#servicos" className="hover:text-white transition-colors">
                   SERVIÇOS (Soluções)
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#processos" className="hover:text-white transition-colors">
+                <Link to="/#processos" className="hover:text-white transition-colors">
                   PROCESSOS (Ecossistema)
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#contato" className="hover:text-white transition-colors">

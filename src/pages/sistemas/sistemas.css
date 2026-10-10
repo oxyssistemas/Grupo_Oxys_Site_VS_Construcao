@@ -1,0 +1,584 @@
+/* Estilos da página Oxys Sistemas (carregados só quando a página é aberta) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap');
+
+.font-brand-title {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-brand-sub {
+  font-family: 'Outfit', sans-serif;
+}
+
+.oxys-sistemas-page code,
+.oxys-sistemas-page pre,
+.oxys-sistemas-page .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Immersive UI Dot Matrix Pattern & Grids */
+.bg-dot-matrix {
+  background-image: radial-gradient(circle at 2px 2px, #1e293b 1px, transparent 0);
+  background-size: 36px 36px;
+}
+
+.bg-dot-matrix-dense {
+  background-image: radial-gradient(circle at 1.5px 1.5px, #334155 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.bg-radial-glow {
+  background: radial-gradient(circle 900px at 50% -120px, rgba(6, 182, 212, 0.14), rgba(59, 130, 246, 0.06), transparent 75%);
+}
+
+.bg-radial-glow-cyan {
+  background: radial-gradient(circle 600px at 50% 50%, rgba(6, 182, 212, 0.08), transparent 70%);
+}
+
+/* Immersive UI Glows & Borders */
+.glow-cyan-sm {
+  box-shadow: 0 0 15px -3px rgba(6, 182, 212, 0.25);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.3);
+}
+
+.glow-cyan-lg {
+  box-shadow: 0 0 50px -10px rgba(6, 182, 212, 0.35);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.3);
+}
+
+.glow-cyan-bar {
+  box-shadow: 0 0 10px #06b6d4, 0 0 20px rgba(6, 182, 212, 0.4);
+}
+
+/* Hide scrollbar utility */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Dynamic Background & Terminal Animations */
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+@keyframes floatSlow1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.18;
+  }
+  50% {
+    transform: translate(30px, -25px) scale(1.12);
+    opacity: 0.28;
+  }
+}
+
+@keyframes floatSlow2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translate(-35px, 20px) scale(1.15);
+    opacity: 0.22;
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    transform: translateY(0%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-grid-drift {
+  animation: gridMove 16s linear infinite;
+}
+
+.animate-float-orb-1 {
+  animation: floatSlow1 10s ease-in-out infinite;
+}
+
+.animate-float-orb-2 {
+  animation: floatSlow2 12s ease-in-out infinite;
+}
+
+.animate-laser-scan {
+  animation: scanLine 4s ease-in-out infinite;
+}
+
+.animate-cursor {
+  animation: cursorBlink 0.9s infinite;
+}
+
+/* Neon Header Divider & Hologram Glow */
+.neon-glow-line {
+  background: linear-gradient(90deg, transparent 0%, rgba(6, 182, 212, 0.05) 15%, rgba(34, 211, 238, 0.95) 50%, rgba(6, 182, 212, 0.05) 85%, transparent 100%);
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.6), 0 0 30px rgba(56, 189, 248, 0.3);
+}
+
+.neon-center-flare {
+  background: radial-gradient(circle, rgba(165, 243, 252, 1) 0%, rgba(34, 211, 238, 0.8) 35%, rgba(6, 182, 212, 0) 70%);
+}
+
+.text-neon-active {
+  color: #a5f3fc;
+  text-shadow: 0 0 6px #22d3ee, 0 0 14px rgba(34, 211, 238, 0.8), 0 0 28px rgba(56, 189, 248, 0.6);
+}
+
+@keyframes hologramPulse {
+  0%, 100% {
+    opacity: 0.85;
+    transform: scaleX(1) scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.05) scaleY(1.03);
+  }
+}
+
+.animate-hologram {
+  animation: hologramPulse 3.5s ease-in-out infinite;
+}
+
+/* 3D Glass & Beveled Card Styles */
+.card-3d {
+  background: linear-gradient(180deg, rgba(20, 26, 38, 0.85) 0%, rgba(10, 14, 23, 0.88) 30%, rgba(5, 7, 12, 0.92) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-left: 1px solid rgba(255, 255, 255, 0.09);
+  border-right: 1px solid rgba(0, 0, 0, 0.6);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.85);
+  box-shadow: 
+    0 15px 35px -5px rgba(0, 0, 0, 0.8),
+    0 5px 15px rgba(0, 0, 0, 0.5),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1.5px 0 0 rgba(0, 0, 0, 0.8),
+    inset 1px 0 0 0 rgba(255, 255, 255, 0.06),
+    inset -1px 0 0 0 rgba(0, 0, 0, 0.4);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d:hover {
+  border-top-color: rgba(165, 243, 252, 0.6);
+  border-left-color: rgba(34, 211, 238, 0.3);
+  box-shadow: 
+    0 25px 50px -10px rgba(0, 0, 0, 0.9),
+    0 0 30px -5px rgba(6, 182, 212, 0.3),
+    inset 0 2px 0 0 rgba(165, 243, 252, 0.5),
+    inset 0 -2px 0 0 rgba(0, 0, 0, 0.9),
+    inset 1px 0 0 0 rgba(34, 211, 238, 0.2);
+}
+
+@keyframes lightSheen {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(250%) rotate(25deg);
+  }
+}
+
+.animate-sheen {
+  animation: lightSheen 6s ease-in-out infinite;
+}
+
+@keyframes saasActiveGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px -2px var(--saas-glow, rgba(6, 182, 212, 0.4)), inset 0 0 15px rgba(255, 255, 255, 0.05);
+    transform: translateY(0px) scale(1.02);
+  }
+  50% {
+    box-shadow: 0 0 35px 2px var(--saas-glow, rgba(6, 182, 212, 0.65)), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px) scale(1.03);
+  }
+}
+
+.animate-saas-active {
+  animation: saasActiveGlow 3s ease-in-out infinite;
+}
+
+@keyframes beaconWave {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.animate-beacon-wave {
+  animation: beaconWave 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+/* 3D Planetary & Ring Orbit Animations */
+@keyframes rotateHorizontalRing {
+  0% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotateHorizontalRingFast {
+  0% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(360deg);
+  }
+}
+
+@keyframes spinRing {
+  0% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(360deg);
+  }
+}
+
+@keyframes spinRingReverse {
+  0% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(360deg);
+  }
+  100% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(0deg);
+  }
+}
+
+@keyframes planetAtmosphereDrift {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+@keyframes atmosphericCloudsSlow {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes orbitShepherdMoon {
+  0% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(0deg) translateX(145px) rotateZ(0deg) rotateY(8deg) rotateX(-75deg);
+  }
+  100% {
+    transform: rotateX(75deg) rotateY(-8deg) rotateZ(360deg) translateX(145px) rotateZ(-360deg) rotateY(8deg) rotateX(-75deg);
+  }
+}
+
+@keyframes floatPlanet {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+.animate-horizontal-ring {
+  animation: rotateHorizontalRing 24s linear infinite;
+}
+
+.animate-horizontal-ring-fast {
+  animation: rotateHorizontalRing 12s linear infinite;
+}
+
+.animate-spin-ring {
+  animation: spinRing 24s linear infinite;
+}
+
+.animate-spin-ring-fast {
+  animation: spinRing 12s linear infinite;
+}
+
+.animate-spin-ring-reverse {
+  animation: spinRingReverse 32s linear infinite;
+}
+
+.animate-planet-atmosphere {
+  animation: planetAtmosphereDrift 40s linear infinite;
+}
+
+.animate-clouds-drift {
+  animation: atmosphericCloudsSlow 35s linear infinite;
+}
+
+.animate-float-planet {
+  animation: floatPlanet 7s ease-in-out infinite;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1500 {
+  perspective: 1500px;
+}
+
+/* Core Technological Hub Rotations (60s, 90s, 120s) */
+@keyframes coreSpinOuter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes coreSpinMid {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes coreSpinInner {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-core-outer {
+  animation: coreSpinOuter 60s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.animate-core-mid {
+  animation: coreSpinMid 90s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.animate-core-inner {
+  animation: coreSpinInner 120s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Asynchronous Floating Cards Keyframes */
+@keyframes floatCard1 {
+  0%, 100% { transform: translate3d(0px, 0px, 0); }
+  50% { transform: translate3d(2px, -7px, 0); }
+}
+
+@keyframes floatCard2 {
+  0%, 100% { transform: translate3d(0px, 0px, 0); }
+  50% { transform: translate3d(-3px, -9px, 0); }
+}
+
+@keyframes floatCard3 {
+  0%, 100% { transform: translate3d(0px, 0px, 0); }
+  50% { transform: translate3d(3px, -6px, 0); }
+}
+
+@keyframes floatCard4 {
+  0%, 100% { transform: translate3d(0px, 0px, 0); }
+  50% { transform: translate3d(-2px, -8px, 0); }
+}
+
+.animate-float-card-1 {
+  animation: floatCard1 6s ease-in-out infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.animate-float-card-2 {
+  animation: floatCard2 7.8s ease-in-out infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.animate-float-card-3 {
+  animation: floatCard3 9.2s ease-in-out infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.animate-float-card-4 {
+  animation: floatCard4 8.4s ease-in-out infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Button sweep light / sheen animation */
+@keyframes buttonSheen {
+  0% { transform: translate3d(-150%, 0, 0) skewX(-20deg); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { transform: translate3d(250%, 0, 0) skewX(-20deg); opacity: 0; }
+}
+
+.animate-btn-sheen {
+  animation: buttonSheen 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Mini telemetry pulse bar */
+@keyframes telemetryPulse {
+  0%, 100% { transform: scaleY(0.35); opacity: 0.5; }
+  50% { transform: scaleY(0.95); opacity: 1; }
+}
+
+.animate-telemetry-bar-1 { animation: telemetryPulse 1.2s ease-in-out infinite; will-change: transform, opacity; height: 100%; transform-origin: bottom; }
+.animate-telemetry-bar-2 { animation: telemetryPulse 1.7s ease-in-out infinite 0.2s; will-change: transform, opacity; height: 100%; transform-origin: bottom; }
+.animate-telemetry-bar-3 { animation: telemetryPulse 1.4s ease-in-out infinite 0.4s; will-change: transform, opacity; height: 100%; transform-origin: bottom; }
+.animate-telemetry-bar-4 { animation: telemetryPulse 1.9s ease-in-out infinite 0.1s; will-change: transform, opacity; height: 100%; transform-origin: bottom; }
+.animate-telemetry-bar-5 { animation: telemetryPulse 1.3s ease-in-out infinite 0.3s; will-change: transform, opacity; height: 100%; transform-origin: bottom; }
+.animate-telemetry-bar-6 { animation: telemetryPulse 1.6s ease-in-out infinite 0.5s; will-change: transform, opacity; height: 100%; transform-origin: bottom; }
+
+/* Nebula Filaments & Streamers Animations */
+@keyframes nebulaFlow1 {
+  0%, 100% { opacity: 0.55; transform: translate3d(0, 0, 0) scale(1); }
+  50% { opacity: 0.85; transform: translate3d(-8px, -6px, 0) scale(1.04); }
+}
+
+@keyframes nebulaFlow2 {
+  0%, 100% { opacity: 0.45; transform: translate3d(0, 0, 0) scale(1); }
+  50% { opacity: 0.75; transform: translate3d(6px, 8px, 0) scale(1.06); }
+}
+
+@keyframes nebulaFlow3 {
+  0%, 100% { opacity: 0.35; transform: translate3d(0, 0, 0) scale(1); }
+  50% { opacity: 0.65; transform: translate3d(-10px, 4px, 0) scale(1.03); }
+}
+
+@keyframes filamentPulse {
+  0%, 100% { stroke-dashoffset: 0; opacity: 0.6; }
+  50% { stroke-dashoffset: -40; opacity: 1; }
+}
+
+@keyframes nebulaWebFlow {
+  0% { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes nebulaWebFlowRev {
+  0% { stroke-dashoffset: -200; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes nebulaNodePing {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+.animate-nebula-flow-1 {
+  animation: nebulaFlow1 12s ease-in-out infinite;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.animate-nebula-flow-2 {
+  animation: nebulaFlow2 16s ease-in-out infinite;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.animate-nebula-flow-3 {
+  animation: nebulaFlow3 20s ease-in-out infinite;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.animate-filament-pulse {
+  animation: filamentPulse 8s steps(48) infinite;
+  will-change: stroke-dashoffset, opacity;
+}
+
+.animate-nebula-web-flow {
+  animation: nebulaWebFlow 14s steps(168) infinite;
+  will-change: stroke-dashoffset;
+}
+
+.animate-nebula-web-flow-rev {
+  animation: nebulaWebFlowRev 18s steps(216) infinite;
+  will-change: stroke-dashoffset;
+}
+
+.animate-nebula-web-fast {
+  animation: nebulaWebFlow 7s steps(84) infinite;
+  will-change: stroke-dashoffset;
+}
+
+.animate-nebula-node-ping {
+  animation: nebulaNodePing 3.5s steps(21) infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-core-outer,
+  .animate-core-mid,
+  .animate-core-inner,
+  .animate-float-card-1,
+  .animate-float-card-2,
+  .animate-float-card-3,
+  .animate-float-card-4,
+  .animate-btn-sheen,
+  .animate-float-planet,
+  .animate-horizontal-ring,
+  .animate-nebula-flow-1,
+  .animate-nebula-flow-2,
+  .animate-nebula-flow-3,
+  .animate-filament-pulse,
+  .animate-nebula-web-flow,
+  .animate-nebula-web-flow-rev,
+  .animate-nebula-web-fast,
+  .animate-nebula-node-ping {
+    animation: none !important;
+  }
+}
+
+
+
