@@ -67,7 +67,7 @@ export const PLANS: Plan[] = [
     description: 'Todos os recursos para operações em expansão.',
     price: null,
     icon: 'premium',
-    highlights: ['Tudo do Profissional', 'Filiais (várias lojas)', 'Marca própria (white label)', 'Assistente de IA', 'Portal de marketing'],
+    highlights: ['Tudo do Profissional', 'Filiais (várias lojas)', 'Marca própria (white label)', 'Portal de marketing'],
   },
 ];
 
